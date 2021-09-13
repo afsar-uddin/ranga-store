@@ -14,16 +14,19 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
-      </div>
+      <div class="product-col">
+      <img class="product-image" src=${image}></img>
+      
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
       <p>User Rating: ${product.rating.rate}</p>
       <p>Average Rating: ${product.rating.count}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" onclick="loadDetail(${product.id})" class="btn btn-danger">Details</button></div>
+      <h4>Price: $ ${product.price}</h4>
+      </div>
+      <div class="btns">
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="align-self-end buy-now">add to cart</button>
+      <button id="details-btn" onclick="loadDetail(${product.id})" class="align-self-end">Details</button>
+      </div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -96,7 +99,7 @@ const showDetail = product => {
   const loadDetail = document.getElementById('load-detail');
   loadDetail.textContent = '';
   const div = document.createElement('div');
-  div.classList.add('single-product');
+  div.classList.add('product-detail');
   div.innerHTML = `
     <img src="${product.image}" />
     <h3>${product.title}</h3>
