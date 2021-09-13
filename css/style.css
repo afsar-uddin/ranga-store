@@ -50,6 +50,10 @@ header {
 .product:hover {
   box-shadow: none;
 }
+.product-col {
+  margin-bottom: 30px;
+}
+
 header h1>span, 
 .rating {
   color: #469e9d;

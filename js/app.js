@@ -19,8 +19,8 @@ const showProducts = (products) => {
       <img class="product-image" src=${image} />
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
-      <p class="rating">User Rating: ${product.rating.rate}</p>
-      <p class="rating">Average Rating: ${product.rating.count}</p>
+      <p class="rating">User Rating: ${product.rating.rate} <span class="glyphicon glyphicon-star"></span></p>
+      <p class="rating">Average Rating: ${product.rating.count} <span class="glyphicon glyphicon-user"></span></p>
       <h4>Price: $ ${product.price}</h4>
       </div>
       <div class="btns">
@@ -107,8 +107,8 @@ const showDetail = product => {
     <p>$${product.price}</p>
     <p>${product.description}<p>
     <p>Category: ${product.category}</p>
-    <p class="rating">User rating: ${product.rating.rate}</p>
-    <p class="rating">Average rating: ${product.rating.count}</p>
+    <p class="rating">User rating: ${product.rating.rate} <span class="glyphicon glyphicon-star"></span></p>
+    <p class="rating">Average rating: ${product.rating.count} <span class="glyphicon glyphicon-user"></span></p>
   `;
   loadDetail.appendChild(div);
 }
