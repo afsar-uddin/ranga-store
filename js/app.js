@@ -1,3 +1,4 @@
+// fetch for product load 
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -15,12 +16,11 @@ const showProducts = (products) => {
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div class="product-col">
-      <img class="product-image" src=${image}></img>
-      
+      <img class="product-image" src=${image} />
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
-      <p>User Rating: ${product.rating.rate}</p>
-      <p>Average Rating: ${product.rating.count}</p>
+      <p class="rating">User Rating: ${product.rating.rate}</p>
+      <p class="rating">Average Rating: ${product.rating.count}</p>
       <h4>Price: $ ${product.price}</h4>
       </div>
       <div class="btns">
@@ -31,6 +31,7 @@ const showProducts = (products) => {
     document.getElementById("all-products").appendChild(div);
   }
 };
+// product item count and addto cart
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -40,6 +41,7 @@ const addToCart = (id, price) => {
   document.getElementById("total-Products").innerText = count;
 };
 
+// input value target and get value
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -85,8 +87,7 @@ const updateTotal = () => {
 }
 updateTotal();
 
-// Detail
-
+// fetch for product Detail 
 const loadDetail = id => {
   // Product detail fetch
   const url = `https://fakestoreapi.com/products/${id}`
@@ -94,7 +95,7 @@ const loadDetail = id => {
     .then(response => response.json())
     .then(data => showDetail(data))
 }
-
+// product detail display UI
 const showDetail = product => {
   const loadDetail = document.getElementById('load-detail');
   loadDetail.textContent = '';
@@ -106,8 +107,8 @@ const showDetail = product => {
     <p>$${product.price}</p>
     <p>${product.description}<p>
     <p>Category: ${product.category}</p>
-    <p>User rating: ${product.rating.rate}</p>
-    <p>Average rating: ${product.rating.count}</p>
+    <p class="rating">User rating: ${product.rating.rate}</p>
+    <p class="rating">Average rating: ${product.rating.count}</p>
   `;
   loadDetail.appendChild(div);
 }
