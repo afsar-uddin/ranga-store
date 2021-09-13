@@ -19,9 +19,11 @@ const showProducts = (products) => {
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
+      <p>User Rating: ${product.rating.rate}</p>
+      <p>Average Rating: ${product.rating.count}</p>
       <h2>Price: $ ${product.price}</h2>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <button id="details-btn" onclick="loadDetail(${product.id})" class="btn btn-danger">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -30,7 +32,6 @@ let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
-  // console.log(price)
   updateTaxAndCharge();
   updateTotal();
   document.getElementById("total-Products").innerText = count;
@@ -38,9 +39,7 @@ const addToCart = (id, price) => {
 
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
-  // const converted = parseInt(element);
   const converted = parseFloat(element);
-  // console.log(element)
   return converted;
 };
 
@@ -54,7 +53,6 @@ const updatePrice = (id, value) => {
 
 // set innerText function
 const setInnerText = (id, value) => {
-  // document.getElementById(id).innerText = Math.round(value);
   document.getElementById(id).innerText = parseFloat(value).toFixed(2);
 };
 
@@ -79,7 +77,34 @@ const updateTaxAndCharge = () => {
 const updateTotal = () => {
   const grandTotal = getInputValue("price") + getInputValue("delivery-charge") + getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
-  console.log(getInputValue("price"));
 
   return grandTotal;
+}
+updateTotal();
+
+// Detail
+
+const loadDetail = id => {
+  // Product detail fetch
+  const url = `https://fakestoreapi.com/products/${id}`
+  fetch(url)
+    .then(response => response.json())
+    .then(data => showDetail(data))
+}
+
+const showDetail = product => {
+  const loadDetail = document.getElementById('load-detail');
+  loadDetail.textContent = '';
+  const div = document.createElement('div');
+  div.classList.add('single-product');
+  div.innerHTML = `
+    <img src="${product.image}" />
+    <h3>${product.title}</h3>
+    <p>$${product.price}</p>
+    <p>${product.description}<p>
+    <p>Category: ${product.category}</p>
+    <p>User rating: ${product.rating.rate}</p>
+    <p>Average rating: ${product.rating.count}</p>
+  `;
+  loadDetail.appendChild(div);
 }
